@@ -2,7 +2,7 @@ from customtkinter import CTk, CTkFrame, CTkFont, CTkLabel, CTkButton
 
 from game.counter import Counter
 from game.countrytools import game_country_generator
-from game.question_handling import question
+from game.question_handling import Question
 
 from winfunctions import window_init, close_and_open
 
@@ -98,7 +98,7 @@ class GameWindow(CTk):
         """Создает и возвращает фрейм с новым вопросом"""
 
         try:
-            q = question(next(self.game_countries))
+            q = Question.from_country(next(self.game_countries))
             return QuestionFrame(self, question=q,
                                  parent=self, border_width=2)
         except StopIteration:

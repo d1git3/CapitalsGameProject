@@ -13,6 +13,16 @@ class Question:
     def __iter__(self):
         return QuestionIterator(self.options)
 
+    @classmethod
+    def from_country(cls, country: str):
+        """Принимает страну, возвращает вопрос"""
+
+        current_country = country
+        options, answer = set_options_and_answer(country)
+        return cls(title=current_country,
+                        options=options,
+                        answer=answer)
+
 
 class QuestionIterator:
     """Класс для представления итератора для вопроса"""
@@ -30,13 +40,3 @@ class QuestionIterator:
             self.counter += 1
             return result
         raise StopIteration
-
-
-def question(country: str) -> Question:
-    """Принимает страну, возвращает вопрос"""
-
-    current_country = country
-    options, answer = set_options_and_answer(country)
-    return Question(title=current_country,
-                    options=options,
-                    answer=answer)
